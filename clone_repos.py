@@ -1,13 +1,15 @@
 import os
 
-def cloneGithubProject(url):
-    print("cloaning: ", url)
-    os.system("git clone ".format(url))
+def cloneGithubProject(url, name):
+    print("cloaning: ")
+    command = "git clone {} {}".format(url, name)
+    print(command)
+    os.system(command)
 
 def main():
-    with open("./repos") as file:
-        for line in file.readlines():
-            cloneGithubProject(line)
+    with open("./repos", 'r+') as file:
+        for idx, repo in enumerate(file.readlines(), start=1):
+            cloneGithubProject(repo.rstrip('\n'), "dama-{}".format(idx))
         file.close()
 
 if __name__ == "__main__":
